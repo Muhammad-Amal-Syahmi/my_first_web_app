@@ -22,8 +22,9 @@ namespace my_first_web_app
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            //css style
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-lumen.css",
                       "~/Content/site.css"));
         }
     }

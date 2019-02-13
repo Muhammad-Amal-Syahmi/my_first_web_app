@@ -1,0 +1,36 @@
+﻿@model my_first_web_app.ViewModels.RandomMovieViewModel
+
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*
+    This is a comment
+    on multiple lines
+*@
+
+@{ 
+    var className = Model.Customers.Count > 0 ? "popular" : null;
+}
+
+<h2>Customer List</h2>
+<div class="container" style="margin-top:30px;">
+    @if (Model.Customers.Count == 0)
+    {
+        <text>No one has rented this movie before.</text>
+    }
+    else
+    {
+        <ul>
+            @foreach (var customer in Model.Customers)
+            {
+
+                <li>@Html.ActionLink(customer.Name, "Random", "Movies", 1)</li>
+            }
+        </ul>
+    }
+</div>
+
+
+
