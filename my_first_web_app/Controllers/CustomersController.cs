@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.Web.Mvc;
 using my_first_web_app.Models;
 
@@ -31,7 +28,7 @@ namespace my_first_web_app.Controllers
 
         public ActionResult Details(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id); //lambda expression: to traverse the list of customers
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id); //lambda expression: to traverse the list of customers
 
             if (customer == null)
                 return HttpNotFound();
