@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using my_first_web_app.Models;
 using my_first_web_app.ViewModels;
@@ -10,6 +8,13 @@ namespace my_first_web_app.Controllers
 {
     public class MoviesController : Controller
     {
+        private ApplicationDbContext _context;
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        /*
         private IEnumerable<Movie> GetMovies()
         {
             return new List<Movie>
@@ -18,12 +23,22 @@ namespace my_first_web_app.Controllers
                 new Movie { Id=2,Name="Wall-e"}
             };
         }
+        */
 
         public ViewResult Index()
         {
-            var movies = GetMovies();
+            var movies = _context.Movies.ToList();
 
             return View(movies);
+        }
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id); //lambda expression: to traverse the list of customers
+
+            if (movie == null)
+                return HttpNotFound();
+
+            return View(movie);
         }
 
         // GET: Movies
@@ -42,7 +57,7 @@ namespace my_first_web_app.Controllers
                 Customers = customers
             };
 
-            /* Helper Method */ 
+            /* Helper Method */
             return View(viewModel);
             //return Content("Hello World!");
             //return HttpNotFound();
